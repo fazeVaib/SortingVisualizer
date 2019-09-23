@@ -13,7 +13,7 @@ This repo consists of the python scripts that can visualize the famous Sorting A
 
 ### To Run
 
-*currently it is implemented in jupter notebook, but will be shifted to web soon*
+*currently it is implemented in jupyter notebook, but will be shifted to web soon*
 
 - Install plotly, python3, jupyter-notebook
 - Set the amount of data you need to perform sorting on
