@@ -7,7 +7,9 @@ This repo consists of the python scripts that can visualize the famous Sorting A
 ### Sorting Algorithms Implemented
 - Bubble Sort
 - Insertion Sort
-- Quick sort
+- Selection Sort
+- Quick Sort
+- Merge Sort
 
 ### To Run
 
