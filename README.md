@@ -10,6 +10,7 @@ This repo consists of the python scripts that can visualize the famous Sorting A
 - Selection Sort
 - Quick Sort
 - Merge Sort
+- Heap Sort
 
 ### To Run
 
@@ -22,6 +23,5 @@ This repo consists of the python scripts that can visualize the famous Sorting A
 
 
 ### TODO
-- Implementing more algorithms
 - Comparisons between algorithms
-- Deploying on web using python web frameworks like Flask or Django
+- Deploying on web using python web frameworks like Flask, Django or Dash.
