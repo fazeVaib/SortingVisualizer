@@ -2,11 +2,12 @@ window.onload = function () {
     
     var slider = document.getElementById("myRange");
     var output = document.getElementById("demoPrint");
+    var sortButton = this.document.getElementById("sortButton");
     output.innerHTML = slider.value; // Display the default slider value
 
     
     var mydata = [12, 19, 3, 5, 2, 3];
-    var mylabel = ['January', 'February', 'March', 'April', 'May', 'June'];
+    var mylabel = [0, 1, 2, 3, 4, 5];
     
     
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -17,45 +18,68 @@ window.onload = function () {
             datasets: [{
                 label: '# of Votes',
                 data: mydata,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
                 borderWidth: 1
             }]
         },
         options: {
+            legend: false,
             scales: {
                 yAxes: [{
+                    display: false,
                     ticks: {
                         beginAtZero: true
                     }
+                }],
+                xAxes: [{
+                    display : false,
+                    categoryPercentage : 1.0,
+                    barPercentage: 1.0
                 }]
             }
         }
     });
+
+    
     function generateData(num){
-        mydata = [parseInt(num), 5, 3, 5, 2, 3];
-        console.log(mydata);
-        console.log(myChart.data.datasets[0].data);
+        mydata = Array.apply(null, {
+            length: num
+        }).map(function () {
+            return Math.floor(Math.random() * 100 % 100) + 1;
+        });
+        // console.log(mydata);
+        // console.log(myChart.data.datasets[0].data);
+        
+        var temp = Array.apply(null, {
+            length: num
+        }).map(Number.call, Number);
+        myChart.data.labels = temp;
+        
+        // console.log(mydata);
+        // console.log(temp);
+        
         myChart.data.datasets[0].data = mydata;
         myChart.update();
     }
+
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function () {
         output.innerHTML = slider.value;
         generateData(slider.value);
+    };
+
+    sortButton.onclick = function() {
+        var i;
+        for(i=1; i<10; i++){
+            mydata = Array.apply(null, {
+                length: slider.value
+            }).map(function () {
+                return Math.floor(Math.random() * 100 % 100) + 1;
+            });
+            
+            console.log(mydata);
+            myChart.data.datasets[0].data = mydata;
+            myChart.update();
+            
+        }
     };
 };
