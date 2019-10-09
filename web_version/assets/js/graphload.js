@@ -22,6 +22,9 @@ window.onload = function () {
             }]
         },
         options: {
+            animation: {
+                duration: 100
+            },
             legend: false,
             scales: {
                 yAxes: [{
@@ -69,17 +72,23 @@ window.onload = function () {
 
     sortButton.onclick = function() {
         var i;
-        for(i=1; i<10; i++){
-            mydata = Array.apply(null, {
-                length: slider.value
-            }).map(function () {
-                return Math.floor(Math.random() * 100 % 100) + 1;
-            });
-            
-            console.log(mydata);
-            myChart.data.datasets[0].data = mydata;
-            myChart.update();
-            
+        for(i=0; i<10; i++){
+            (function (i) {
+
+                window.setTimeout(function () {
+
+                    mydata = Array.apply(null, {
+                        length: slider.value
+                    }).map(function () {
+                        return Math.floor(Math.random() * 100 % 100) + 1;
+                    });
+
+                    console.log(mydata);
+                    myChart.data.datasets[0].data = mydata;
+                    myChart.update();
+                    
+                }, i * 100);
+            }(i));
         }
     };
 };
