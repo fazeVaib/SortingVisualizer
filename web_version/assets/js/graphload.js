@@ -71,8 +71,7 @@ window.onload = function () {
     };
 
     sortButton.onclick = function() {
-        var i;
-        for(i=0; i<10; i++){
+        for(var i=0; i<10; i++){
             (function (i) {
 
                 window.setTimeout(function () {
@@ -84,10 +83,10 @@ window.onload = function () {
                     });
 
                     console.log(mydata);
+                    console.log(i);
                     myChart.data.datasets[0].data = mydata;
-                    myChart.update();
-                    
-                }, i * 100);
+                    window.setTimeout(myChart.update(), 1000);
+                }, i*1000);
             }(i));
         }
     };
