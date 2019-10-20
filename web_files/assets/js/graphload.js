@@ -24,7 +24,7 @@ window.onload = function () {
         data: {
             labels: mylabel,
             datasets: [{
-                label: '# of elements',
+                label: "Value of bar: ",
                 data: mydata,
                 borderColor: "#FFFFFF",
                 backgroundColor: myColors,
