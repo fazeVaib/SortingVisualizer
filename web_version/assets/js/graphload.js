@@ -1,15 +1,14 @@
 window.onload = function () {
-    
+
     var slider = document.getElementById("myRange");
     var output = document.getElementById("demoPrint");
     var sortButton = this.document.getElementById("sortButton");
     output.innerHTML = slider.value; // Display the default slider value
 
-    
     var mydata = [12, 19, 3, 5, 2, 3];
     var mylabel = [0, 1, 2, 3, 4, 5];
-    
-    
+
+
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -34,32 +33,26 @@ window.onload = function () {
                     }
                 }],
                 xAxes: [{
-                    display : false,
-                    categoryPercentage : 1.0,
+                    display: false,
+                    categoryPercentage: 1.0,
                     barPercentage: 1.0
                 }]
             }
         }
     });
 
-    
-    function generateData(num){
+
+    function generateData(num) {
         mydata = Array.apply(null, {
             length: num
         }).map(function () {
             return Math.floor(Math.random() * 100 % 100) + 1;
         });
-        // console.log(mydata);
-        // console.log(myChart.data.datasets[0].data);
-        
         var temp = Array.apply(null, {
             length: num
         }).map(Number.call, Number);
         myChart.data.labels = temp;
-        
-        // console.log(mydata);
-        // console.log(temp);
-        
+
         myChart.data.datasets[0].data = mydata;
         myChart.update();
     }
@@ -70,24 +63,26 @@ window.onload = function () {
         generateData(slider.value);
     };
 
-    sortButton.onclick = function() {
-        for(var i=0; i<10; i++){
-            (function (i) {
+    function timer(ms) {
+        return new Promise(res => setTimeout(res, ms));
+    }
 
-                window.setTimeout(function () {
+    async function Sort() { // We need to wrap the loop into an async function for this to work
+        for (var i = 0; i < 10; i++) {
+            mydata = Array.apply(null, {
+                length: slider.value
+            }).map(function () {
+                return Math.floor(Math.random() * 100 % 100) + 1;
+            });
 
-                    mydata = Array.apply(null, {
-                        length: slider.value
-                    }).map(function () {
-                        return Math.floor(Math.random() * 100 % 100) + 1;
-                    });
-
-                    console.log(mydata);
-                    console.log(i);
-                    myChart.data.datasets[0].data = mydata;
-                    window.setTimeout(myChart.update(), 1000);
-                }, i*1000);
-            }(i));
+            myChart.data.datasets[0].data = mydata;
+            myChart.update();
+            
+            await timer(1000);
         }
+    }
+
+    sortButton.onclick = function () {
+        Sort();
     };
 };
