@@ -10,15 +10,42 @@
         Sorting Visualizer
     </h1>
     <div class="slidecontainer">
-        <input type="range" min="10" max="200" value="50" class="slider" id="myRange">
+        <p style="display: inline; padding: 2px;">Size: </p>
+        <input type="range" min="5" max="200" value="5" class="slider" id="myRange" style="display: inline;">
     </div>
-    <p id="demoPrint">
-    </p>
+
+    <div class="slidecontainer">
+        <p style="display: inline; padding: 2px;">Speed: </p>
+        <input type="range" min="1" max="1000" value="5" class="slider" id="speedSlider" style="display: inline;">
+    </div>
+
+    <div>
+        <label class="radio">
+            <input type="radio" name="r" value="Bubble" checked>
+            <span> Bubble Sort</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="r" value="Insertion">
+            <span> Insertion Sort</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="r" value="Selection">
+            <span> Selection Sort</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="r" value="Merge">
+            <span> Merge Sort</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="r" value="Heap">
+            <span> Heap Sort</span>
+        </label>
+    </div>
 
     <button id='sortButton'>Sort</button>
     
     <div class="wrapper">
-        <canvas id="myChart" width="600" height="250"></canvas>
+        <canvas id="myChart" width="600" height="150"></canvas>
     </div>
     
     <script src="./web_files/assets/js/graphload.js"></script>

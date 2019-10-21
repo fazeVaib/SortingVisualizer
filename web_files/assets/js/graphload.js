@@ -1,9 +1,13 @@
 window.onload = function () {
 
     var slider = document.getElementById("myRange");
-    var output = document.getElementById("demoPrint");
+    var speedSlider = document.getElementById("speedSlider");
+    var speed = speedSlider.value;
     var sortButton = this.document.getElementById("sortButton");
-    output.innerHTML = slider.value; // Display the default slider value
+    var sortRadio = document.getElementsByName('r');
+    var audio = new Audio('./web_files/assets/js/s3.m4a');
+    audio.muted = false;
+
 
     var RED = "#CD5A41";
     var GREEN = "#ACE797";
@@ -15,7 +19,7 @@ window.onload = function () {
     var mydata = [12, 19, 3, 5, 2, 3];
     var mylabel = [0, 1, 2, 3, 4, 5];
     var myColors = Array(6).fill("#EAE8E8");
-    console.log(myColors); 
+    // console.log(myColors); 
 
     var ctx = document.getElementById('myChart').getContext('2d');
     
@@ -64,18 +68,20 @@ window.onload = function () {
         }).map(Number.call, Number);
         myChart.data.labels = temp;
 
-        console.log(num);
         myColors = Array.apply(null, { length: num }).fill("#EAE8E8");
         myChart.data.datasets[0].backgroundColor = myColors;
-        console.log(myChart.data.datasets[0].backgroundColor);
         myChart.data.datasets[0].data = mydata;
         myChart.update();
     }
 
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function () {
-        output.innerHTML = slider.value;
         generateData(slider.value);
+    };
+    
+    // Update the current SpeedSlider value (each time you drag the slider handle)
+    speedSlider.oninput = function () {
+        speed = speedSlider.value;
     };
     
     function timer(ms) {
@@ -103,6 +109,7 @@ window.onload = function () {
                     myChart.data.datasets[0].data = mydata;
                     myChart.data.datasets[0].backgroundColor = myColors;
                     myChart.update();
+                    // audio.play();
                     await timer(speed);
                     myColors[j] = LIGHT_GREY;
                     myColors[j+1] = LIGHT_GREY;
@@ -134,6 +141,22 @@ window.onload = function () {
     }
         
     sortButton.onclick = function () {
-        bubble_Sort(mydata, 1);
+        if (sortRadio[0].checked) {
+            console.log(sortRadio[0].value);
+            bubble_Sort(mydata, speed);
+        }
+        else if (sortRadio[1].checked) {
+            console.log(sortRadio[1].value);
+
+        }
+        else if (sortRadio[2].checked) {
+            console.log(sortRadio[2].value);
+        }
+        else if (sortRadio[3].checked) {
+            console.log(sortRadio[3].value);
+        }
+        else {
+            console.log(sortRadio[4].value);
+        }
     };
 };
