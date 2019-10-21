@@ -143,7 +143,7 @@ window.onload = function () {
     sortButton.onclick = function () {
         if (sortRadio[0].checked) {
             console.log(sortRadio[0].value);
-            bubble_Sort(mydata, speed);
+            bubble_Sort(mydata, 1001-speed);
         }
         else if (sortRadio[1].checked) {
             console.log(sortRadio[1].value);
