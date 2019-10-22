@@ -125,6 +125,10 @@ window.onload = function () {
             myChart.data.datasets[0].data = mydata;
             myChart.update();
         }
+
+        sortButton.disabled = false;
+        slider.disabled = false;
+        speedSlider.disabled = false;
     }
 
     async function bubble_Sort(arr, speed) {
@@ -171,9 +175,18 @@ window.onload = function () {
         myColors[0] = DARK_GREEN;
         myChart.data.datasets[0].backgroundColor = myColors;
         myChart.update();
+
+        sortButton.disabled = false;
+        slider.disabled = false;
+        speedSlider.disabled = false;
     }
     
     sortButton.onclick = function () {
+
+        sortButton.disabled  = true;
+        slider.disabled = true;
+        speedSlider.disabled = true;
+
         if (sortRadio[0].checked) {
             console.log(sortRadio[0].value);
             bubble_Sort(mydata, 1001-speed);
@@ -189,8 +202,13 @@ window.onload = function () {
         else if (sortRadio[3].checked) {
             console.log(sortRadio[3].value);
         }
-        else {
+        else if (sortRadio[4].checked) {
             console.log(sortRadio[4].value);
         }
+        else {
+            console.log(sortRadio[5].value);
+        }
+        
+        
     };
 };

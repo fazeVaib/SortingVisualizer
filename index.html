@@ -2,51 +2,90 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="./web_files/assets/style.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<style>
+.row{
+    padding:40px 12px;
+    margin-left: 3vh;
+    margin-right: 3vh;
+}
+
+canvas{
+    padding: 24px;
+    border: 3px solid #00000056;
+    border-radius: 12px;
+}
+
+</style>
+
 </head>
 
 <body>
-    <h1>
-        Sorting Visualizer
-    </h1>
-    <div class="slidecontainer">
-        <p style="display: inline; padding: 2px;">Size: </p>
-        <input type="range" min="5" max="200" value="5" class="slider" id="myRange" style="display: inline;">
-    </div>
+    <!-- Image and text -->
+    <nav style="text-align: center;" class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#" style="font-family:'Muli', sans-serif ;">
+            Sorting Visualizer
+        </a>
+    </nav>
 
-    <div class="slidecontainer">
-        <p style="display: inline; padding: 2px;">Speed: </p>
-        <input type="range" min="1" max="1000" value="5" class="slider" id="speedSlider" style="display: inline;">
-    </div>
+    <div style="transform: translateY(10%);" class="container-new">
+        <div class="row">
+            <div class="col col-lg-4 col-md-3">
+                   <div class="slidecontainer">
+                       <p style="padding: 2px;">Size: </p>
+                       <input type="range" min="5" max="200" value="5" class="slider" id="myRange"
+                           style="display: inline;">
+                   </div>
 
-    <div>
-        <label class="radio">
-            <input type="radio" name="r" value="Bubble" checked>
-            <span> Bubble Sort</span>
-        </label>
-        <label class="radio">
-            <input type="radio" name="r" value="Insertion">
-            <span> Insertion Sort</span>
-        </label>
-        <label class="radio">
-            <input type="radio" name="r" value="Selection">
-            <span> Selection Sort</span>
-        </label>
-        <label class="radio">
-            <input type="radio" name="r" value="Merge">
-            <span> Merge Sort</span>
-        </label>
-        <label class="radio">
-            <input type="radio" name="r" value="Heap">
-            <span> Heap Sort</span>
-        </label>
-    </div>
+                   <div class="slidecontainer">
+                       <p style="padding: 2px;">Speed: </p>
+                       <input type="range" min="1" max="1000" value="5" class="slider" id="speedSlider"
+                           style="display: inline;">
+                   </div>
 
-    <button id='sortButton'>Sort</button>
+                   <div>
+                       <p style="padding: 2px; margin-top: 5px;">Sorting: </p>
+                       <label class="radio">
+                           <input type="radio" name="r" value="Bubble" checked>
+                           <span> Bubble Sort</span>
+                       </label>
+                       <label class="radio">
+                           <input type="radio" name="r" value="Insertion">
+                           <span> Insertion Sort</span>
+                       </label>
+                       <label class="radio">
+                           <input type="radio" name="r" value="Selection">
+                           <span> Selection Sort</span>
+                       </label>
+                       <label class="radio">
+                           <input type="radio" name="r" value="Merge">
+                           <span> Merge Sort</span>
+                       </label>
+                       <label class="radio">
+                           <input type="radio" name="r" value="Heap">
+                           <span> Heap Sort</span>
+                       </label>
+                       <label class="radio">
+                           <input type="radio" name="r" value="Quick">
+                           <span> Quick Sort</span>
+                       </label>
+                   </div>
+
+                   <button style="background-color: rgb(2, 2, 19); margin-left: 15px;" class="btn btn-lg" id='sortButton'>Sort</button>
+            </div>
+            <!--  -->
+            <div  class="col col-lg-8 col-md-9">
+                <canvas id="myChart" width="600" height=300"></canvas>
+            </div>
+
+        </div>
+    </div>
+ 
     
-    <div class="wrapper">
-        <canvas id="myChart" width="600" height="150"></canvas>
-    </div>
+    
     
     <script src="./web_files/assets/js/graphload.js"></script>
 
