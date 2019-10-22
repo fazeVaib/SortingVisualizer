@@ -100,10 +100,10 @@ window.onload = function () {
             i, j, stop;
 
         for (i = 0; i < len; i++) {
-            for (j = 0, stop = len - i; j < stop-1; j++) {
+            for (j = 0, stop = len - i; j < stop - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
                     myColors[j] = RED;
-                    myColors[j+1] = RED;
+                    myColors[j + 1] = RED;
                     swap(arr, j, j + 1);
                     mydata = arr;
                     myChart.data.datasets[0].data = mydata;
@@ -112,26 +112,26 @@ window.onload = function () {
                     // audio.play();
                     await timer(speed);
                     myColors[j] = LIGHT_GREY;
-                    myColors[j+1] = LIGHT_GREY;
+                    myColors[j + 1] = LIGHT_GREY;
                     myChart.data.datasets[0].backgroundColor = myColors;
                     myChart.update();
                 }
                 else {
 
                     myColors[j] = GREEN;
-                    myColors[j+1] = GREEN;
+                    myColors[j + 1] = GREEN;
                     myChart.data.datasets[0].backgroundColor = myColors;
                     myChart.update();
                     await timer(speed);
                     myColors[j] = LIGHT_GREY;
-                    myColors[j+1] = LIGHT_GREY;
+                    myColors[j + 1] = LIGHT_GREY;
                     myChart.data.datasets[0].backgroundColor = myColors;
                     myChart.update();
 
                 }
             }
             myColors[len - i] = DARK_GREEN;
-            myColors[len - i-1] = DARK_GREEN;
+            myColors[len - i - 1] = DARK_GREEN;
             myChart.data.datasets[0].backgroundColor = myColors;
             myChart.update();
         }
@@ -139,7 +139,7 @@ window.onload = function () {
         myChart.data.datasets[0].backgroundColor = myColors;
         myChart.update();
     }
-        
+    
     sortButton.onclick = function () {
         if (sortRadio[0].checked) {
             console.log(sortRadio[0].value);
