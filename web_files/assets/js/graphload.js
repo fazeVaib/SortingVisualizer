@@ -94,6 +94,39 @@ window.onload = function () {
         arr[second_Index] = temp;
     }
 
+    async function insertionSort(arr, speed) {
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            var el = arr[i];
+            myColors[i] = BLACK;
+            myChart.data.datasets[0].backgroundColor = myColors;
+            myChart.update();
+
+            var j;
+
+            for (j = i - 1; j >= 0 && arr[j] > el; j--) {
+                myColors[j] = RED;
+                arr[j + 1] = arr[j];
+                myChart.data.datasets[0].backgroundColor = myColors;
+                mydata = arr;
+                myChart.data.datasets[0].data = mydata;
+                myChart.update();
+                await timer(speed);
+                myColors[j] = DARK_GREEN;
+                myChart.data.datasets[0].backgroundColor = myColors;
+                myChart.update();
+
+            }
+            arr[j + 1] = el;
+            myColors[i] = DARK_GREEN;
+            myChart.data.datasets[0].backgroundColor = myColors;
+            myChart.update();
+            mydata = arr;
+            myChart.data.datasets[0].data = mydata;
+            myChart.update();
+        }
+    }
+
     async function bubble_Sort(arr, speed) {
 
         var len = arr.length,
@@ -147,6 +180,7 @@ window.onload = function () {
         }
         else if (sortRadio[1].checked) {
             console.log(sortRadio[1].value);
+            insertionSort(mydata, 1001-speed);
 
         }
         else if (sortRadio[2].checked) {
