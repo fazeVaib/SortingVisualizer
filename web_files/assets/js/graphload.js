@@ -180,6 +180,131 @@ window.onload = function () {
         slider.disabled = false;
         speedSlider.disabled = false;
     }
+
+    async function selectionSort(arr, interval) {
+
+        var len = arr.length;
+
+        for (var i = 0; i < len - 1; i = i + 1) {
+            var j_min = i;
+            for (var j = i + 1; j < len; j = j + 1) {
+                if (arr[j] < arr[j_min]) {
+                    myColors[j] = RED;
+                    myColors[j_min] = LIGHT_GREY;
+                    myColors[i] = GREEN;
+                    j_min = j;
+                    myChart.data.datasets[0].backgroundColor = myColors;
+                    myChart.update();
+                    await timer(interval);
+                } 
+                else { 
+                    myColors[j] = BLACK;
+                    myChart.data.datasets[0].backgroundColor = myColors;
+                    myChart.update();
+                    await timer(interval);
+                }
+
+                myColors[j] = LIGHT_GREY;
+                myColors[j_min] = RED;
+                myChart.data.datasets[0].backgroundColor = myColors;
+                myChart.update();
+
+            }
+            if (j_min !== i) {
+                swap(arr, i, j_min);
+                myColors[j_min] = LIGHT_GREY;
+                mydata = arr;
+                myChart.data.datasets[0].data = mydata;
+                myChart.data.datasets[0].backgroundColor = myColors;
+                myChart.update();
+            }
+
+            myColors[i] = DARK_GREEN;
+            myChart.data.datasets[0].backgroundColor = myColors;
+            myChart.update();
+        }
+        myColors[len-1] = DARK_GREEN;
+        myChart.data.datasets[0].backgroundColor = myColors;
+        myChart.update();
+        sortButton.disabled = false;
+        slider.disabled = false;
+        speedSlider.disabled = false;
+    }
+
+    async function merge(left, right) {
+        var result = [],
+            lLen = left.length,
+            rLen = right.length,
+            l = 0,
+            r = 0;
+        while (l < lLen && r < rLen) {
+            if (left[l] < right[r]) {
+                result.push(left[l++]);
+            }
+            else {
+                result.push(right[r++]);
+            }
+        }
+        //remaining part needs to be addred to the result
+        var newdata = result.concat(left.slice(l)).concat(right.slice(r));
+        myChart.data.datasets[0].data = mydata;
+        myChart.update();
+        await timer(2);
+
+        return newdata;
+
+    }
+
+
+    function mergeSort(arr) {
+        var len = arr.length;
+        if (len < 2)
+            return arr;
+        var mid = Math.floor(len / 2),
+            left = arr.slice(0, mid),
+            right = arr.slice(mid);
+        //send left and right to the mergeSort to broke it down into pieces
+        //then merge those
+        return merge(mergeSort(left), mergeSort(right));
+    }
+
+    function quickSort(arr, left, right, interval) {
+        var len = arr.length,
+            pivot,
+            partitionIndex;
+
+
+        if (left < right) {
+            pivot = right;
+            partitionIndex = partition(arr, pivot, left, right, interval);
+
+            //sort left and right
+            quickSort(arr, left, partitionIndex - 1, interval);
+            quickSort(arr, partitionIndex + 1, right, interval);
+        }
+        return arr;
+    }
+
+    async function partition(arr, pivot, left, right, interval) {
+        var pivotValue = arr[pivot],
+            partitionIndex = left;
+
+        for (var i = left; i < right; i++) {
+            if (arr[i] < pivotValue) {
+                swap(arr, i, partitionIndex);
+                myChart.data.datasets[0].data = arr;
+                myChart.update();
+                partitionIndex++;
+                await timer(interval);
+            }
+        }
+        swap(arr, right, partitionIndex);
+        myChart.data.datasets[0].data = mydata;
+        myChart.update();
+        return partitionIndex;
+    }
+
+
     
     sortButton.onclick = function () {
 
@@ -198,15 +323,18 @@ window.onload = function () {
         }
         else if (sortRadio[2].checked) {
             console.log(sortRadio[2].value);
+            selectionSort(mydata, 1001-speed);
         }
         else if (sortRadio[3].checked) {
             console.log(sortRadio[3].value);
+            // mergeSort(mydata);
         }
         else if (sortRadio[4].checked) {
             console.log(sortRadio[4].value);
         }
         else {
             console.log(sortRadio[5].value);
+            quickSort(mydata, 0, slider.value - 1, 1001 - speed);
         }
         
         
