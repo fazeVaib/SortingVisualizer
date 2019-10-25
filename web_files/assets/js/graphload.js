@@ -268,12 +268,15 @@ window.onload = function () {
         return merge(mergeSort(left), mergeSort(right));
     }
 
-    function quickSort(arr, left, right, interval) {
+    async function quickSort(arr, left, right, interval) {
         var len = arr.length,
             pivot,
             partitionIndex;
+        
+        await timer(interval*10);
 
 
+        console.log("Quicksort");
         if (left < right) {
             pivot = right;
             partitionIndex = partition(arr, pivot, left, right, interval);
@@ -282,12 +285,15 @@ window.onload = function () {
             quickSort(arr, left, partitionIndex - 1, interval);
             quickSort(arr, partitionIndex + 1, right, interval);
         }
+        console.log("Quicksort finish");
         return arr;
     }
 
-    async function partition(arr, pivot, left, right, interval) {
+    function partition(arr, pivot, left, right, interval) {
         var pivotValue = arr[pivot],
             partitionIndex = left;
+        
+            console.log("Partition");
 
         for (var i = left; i < right; i++) {
             if (arr[i] < pivotValue) {
@@ -295,12 +301,13 @@ window.onload = function () {
                 myChart.data.datasets[0].data = arr;
                 myChart.update();
                 partitionIndex++;
-                await timer(interval);
+                
             }
         }
         swap(arr, right, partitionIndex);
         myChart.data.datasets[0].data = mydata;
         myChart.update();
+        console.log("PArt fin");
         return partitionIndex;
     }
 
