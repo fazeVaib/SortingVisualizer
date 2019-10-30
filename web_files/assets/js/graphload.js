@@ -231,6 +231,23 @@ window.onload = function () {
         speedSlider.disabled = false;
     }
 
+    function heapSort(array) {
+        // Build our max heap.
+        buildMaxHeap(array);
+      
+        // Find last element.
+        lastElement = array.length - 1;
+      
+        // Continue heap sorting until we have
+        // just one element left in the array.
+        while(lastElement > 0) {
+          swap(array, 0, lastElement);
+      
+          heapify(array, 0, lastElement);
+      
+          lastElement -= 1
+        }
+      }
     function merge(left, right) {
         var result = [],
             i = 0,
@@ -356,6 +373,7 @@ window.onload = function () {
         }
         else if (sortRadio[4].checked) {
             console.log(sortRadio[4].value);
+            heapSort(mydata);
         }
         else {
             console.log(sortRadio[5].value);
