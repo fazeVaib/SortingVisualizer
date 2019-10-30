@@ -231,41 +231,59 @@ window.onload = function () {
         speedSlider.disabled = false;
     }
 
-    async function merge(left, right) {
+    function merge(left, right) {
         var result = [],
-            lLen = left.length,
-            rLen = right.length,
-            l = 0,
-            r = 0;
-        while (l < lLen && r < rLen) {
-            if (left[l] < right[r]) {
-                result.push(left[l++]);
-            }
-            else {
-                result.push(right[r++]);
+            i = 0,
+            j = 0;
+
+        while (i < left.length && j < right.length) {
+
+            // Elements in both arrays are compared against each other.
+            // Whichever element is smaller it's inserted in the results.
+
+            if (left[i] < right[j]) {
+                result.push(left[i++]);       // Each time a value from one array is added, it's 
+            } else {                       // corresponding index variable is incremented.
+                result.push(right[j++]);
             }
         }
-        //remaining part needs to be addred to the result
-        var newdata = result.concat(left.slice(l)).concat(right.slice(r));
-        myChart.data.datasets[0].data = mydata;
-        myChart.update();
-        await timer(2);
 
-        return newdata;
+        // As soon as one of the arrays has been finished, the
+        // remaining values are added to the end of the result array
+
+        mydata2 = result.concat(left.slice(i)).concat(right.slice(j));
+        youpdte(mydata2);
+
+        return mydata2;
 
     }
 
+    async function youpdte(d) {
+        await timer(500);
+        myChart.data.datasets[0].data = mydata2;
+        myChart.update();
+    }
 
-    function mergeSort(arr) {
-        var len = arr.length;
-        if (len < 2)
+    function MergeSort(arr) {
+
+        var len = arr.length,       // number of items in the array 
+            middle,                     // middle of the array
+            left,                       // left side of the array 
+            right;                      // right side of the array 
+
+        // Arrays with 0 or 1 elements don't need sorting
+        if (len < 2) {
             return arr;
-        var mid = Math.floor(len / 2),
-            left = arr.slice(0, mid),
-            right = arr.slice(mid);
-        //send left and right to the mergeSort to broke it down into pieces
-        //then merge those
-        return merge(mergeSort(left), mergeSort(right));
+        }
+
+        middle = Math.floor(len / 2);
+
+
+        left = arr.slice(0, middle);   // left side, from 0 to the middle  
+        right = arr.slice(middle);     // right side, from the middle to the end
+
+        return merge(MergeSort(left), MergeSort(right));
+
     }
 
     async function quickSort(arr, left, right, interval) {
@@ -334,7 +352,7 @@ window.onload = function () {
         }
         else if (sortRadio[3].checked) {
             console.log(sortRadio[3].value);
-            // mergeSort(mydata);
+            MergeSort(mydata);
         }
         else if (sortRadio[4].checked) {
             console.log(sortRadio[4].value);
