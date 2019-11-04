@@ -1,8 +1,8 @@
 # SortingVisualizer
 
-*under progress*
+*web version under progress*
 
-This repo consists of the python scripts that can visualize the famous Sorting Algorithms and generate the animations using plotly.
+This repository consists of the python and JS scripts that can visualize the popular Sorting Algorithms and generate the animations using plotly and graph.js respectively.
 
 ### Sorting Algorithms Implemented
 - Bubble Sort
@@ -29,4 +29,4 @@ This repo consists of the python scripts that can visualize the famous Sorting A
 
 ### TODO
 - Comparisons between algorithms
-- Improving UI
+- Quick, Merge and Heap Sort implementation for Web
