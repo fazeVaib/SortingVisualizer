@@ -19,45 +19,32 @@ app.layout = html.Div(children = [
     html.Div(id='test-div')
 ])
 
-f = 9
-def testfunc(ignore): 
-    global f 
-    f + f+1
-    return "Function i called {} times.".format(str(f))
 
-for i in range(10): 
-    time.sleep(2)
-    app.callback(
-        Output('test-div', 'children'),
-        [Input('input', 'value')]
-    )(testfunc)
+@app.callback(
+    Output(component_id='graph', component_property='figure'),
+    [Input('graph-interval', 'n_intervals')])
+def updateValue(n):
+    global data
+    try:
+        new_data = [n*x for x in data]
+    except Exception:
+        new_data = [20 for x in data]
 
+    d = [go.Bar(y=new_data)]
+    layout = {'yaxis': {'showgrid': False,
+                        'showticklabels': False,
+                        'zeroline': False,
+                        'range': [0,500] 
+                        },
+              'xaxis': {'showgrid': False,
+                        'zeroline': False,
+                        'showticklabels': False,
+                        'title': 'Number of operations: 0'},
+              'plot_bgcolor': 'rgba(0,0,0,0)',
+              'title': str(n) + ' Visualization'}
 
-# @app.callback(
-#     Output(component_id='graph', component_property='figure'),
-#     [Input('graph-interval', 'n_intervals')])
-# def updateValue(n):
-#     global data
-#     try:
-#         new_data = [n*x for x in data]
-#     except Exception:
-#         new_data = [20 for x in data]
-
-#     d = [go.Bar(y=new_data)]
-#     layout = {'yaxis': {'showgrid': False,
-#                         'showticklabels': False,
-#                         'zeroline': False,
-#                         'range': [0,500] 
-#                         },
-#               'xaxis': {'showgrid': False,
-#                         'zeroline': False,
-#                         'showticklabels': False,
-#                         'title': 'Number of operations: 0'},
-#               'plot_bgcolor': 'rgba(0,0,0,0)',
-#               'title': str(n) + ' Visualization'}
-
-#     fig = go.FigureWidget(d, layout)
-#     return fig
+    fig = go.FigureWidget(d, layout)
+    return fig
 
 
 
